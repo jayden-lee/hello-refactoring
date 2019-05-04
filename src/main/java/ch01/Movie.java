@@ -6,42 +6,18 @@ package ch01;
 public class Movie {
 
     public enum PriceCode {
-        REGULAR {
-            @Override
-            public double calculate(Rental rental) {
-                double amount = 2;
-                if (rental.getDaysRented() > 2) {
-                    amount += (rental.getDaysRented() - 2) * 1.5;
-                }
-                return amount;
-            }
-        },
-        CHILDRENS {
-            @Override
-            public double calculate(Rental rental) {
-                double amount = 1.5;
-                if (rental.getDaysRented() > 3) {
-                    amount += (rental.getDaysRented() - 3) * 1.5;
-                }
-                return amount;
-            }
-        },
-        NEW_RELEASE {
-            @Override
-            public double calculate(Rental rental) {
-                return rental.getDaysRented() * 3;
-            }
-        };
-
-        public abstract double calculate(Rental rental);
+        REGULAR,
+        CHILDRENS,
+        NEW_RELEASE
     }
 
     private String title;
-    private PriceCode priceCode;
+
+    private Price price;
 
     public Movie(String title, PriceCode priceCode) {
         this.title = title;
-        this.priceCode = priceCode;
+        setPriceCode(priceCode);
     }
 
     public String getTitle() {
@@ -49,10 +25,32 @@ public class Movie {
     }
 
     public PriceCode getPriceCode() {
-        return priceCode;
+        return price.getPriceCode();
     }
 
-    public void setPriceCode(PriceCode priceCode) {
-        this.priceCode = priceCode;
+    public void setPriceCode(PriceCode arg) {
+        switch (arg) {
+            case REGULAR:
+                price = new RegularPrice();
+                break;
+            case CHILDRENS:
+                price = new ChildrensPrice();
+                break;
+
+            case NEW_RELEASE:
+                price = new NewReleasePrice();
+                break;
+
+            default:
+                throw new IllegalArgumentException("가격 코드가 잘못됐습니다.");
+        }
+    }
+
+    public double getCharge(int daysRented) {
+        return price.getCharge(daysRented);
+    }
+
+    public int getFrequentRenterPoints(int daysRented) {
+        return  price.getFrequentRenterPoints(daysRented);
     }
 }
