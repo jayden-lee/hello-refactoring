@@ -5,7 +5,7 @@
 
 ## CONTENTS
 - [CHAPTER 01 맛보기 예제](https://github.com/jayden-lee/hello-refactoring/tree/master/src/main/java/ch01)
-- CHAPTER 02 리팩토링 개론
+- [CHAPTER 02 리팩토링 개론](https://github.com/jayden-lee/hello-refactoring/tree/master/src/main/java/ch02)
 - [CHAPTER 03 코드의 구린내](https://github.com/jayden-lee/hello-refactoring/tree/master/src/main/java/ch03)
 - CHAPTER 04 테스트 작성
 - CHAPTER 05 리팩토링 기법 카탈로그에 대해
